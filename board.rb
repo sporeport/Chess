@@ -42,8 +42,12 @@ class Board
 
   end
 
-  def move(start, end_pos)
-
+  def move(start_pos, end_pos)
+    if self[start_pos] != nil && self[start_pos].moves.include?(end_pos)
+      self[end_pos] = self[start_pos]
+      self[end_pos].position = end_pos
+      self[start_pos] = nil
+    end
   end
 
   def inspect
