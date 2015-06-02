@@ -13,11 +13,8 @@ class Queen < SlidingPiece
     [-1, -1]
   ]
 
-  attr_reader :display_name
-
-  def initialize(pos, board, color)
-    super
-    @display_name = (color == :black ? "bQ" : "wQ")
+  def display_name
+    color == :black ? "bQ" : "wQ"
   end
 
   def move_dirs

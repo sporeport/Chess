@@ -3,6 +3,7 @@ require_relative 'queen.rb'
 require_relative 'bishop.rb'
 require_relative 'king.rb'
 require_relative 'knight.rb'
+require_relative 'pawn.rb'
 
 require 'byebug'
 
@@ -77,3 +78,5 @@ Rook.new([3, 5], board, :white)
 Rook.new([5, 3], board, :black)
 Bishop.new([2, 2], board, :white)
 Knight.new([1,4], board, :white)
+Pawn.new([1,1], board, :black)
+Pawn.new([4,2], board, :white)

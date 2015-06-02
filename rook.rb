@@ -8,11 +8,9 @@ class Rook < SlidingPiece
     [1, 0],
     [-1, 0]
   ]
-  attr_reader :display_name
 
-  def initialize(pos, board, color)
-    super
-    @display_name = (color == :black ? "bR" : "wR")
+  def display_name
+    color == :black ? "bR" : "wR"
   end
 
   def move_dirs

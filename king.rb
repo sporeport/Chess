@@ -13,12 +13,9 @@ class King < SteppingPiece
     [-1, 1],
     [-1, -1]
   ]
-
-  attr_reader :display_name
-
-  def initialize(pos, board, color)
-    super
-    @display_name = (color == :black ? "bK" : "wK")
+  
+  def display_name
+    color == :black ? "bK" : "wK"
   end
 
   def move_dirs

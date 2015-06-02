@@ -9,11 +9,8 @@ class Bishop < SlidingPiece
       [-1, -1]
     ]
 
-    attr_reader :display_name
-
-    def initialize(pos, board, color)
-      super
-      @display_name = (color == :black ? "bB" : "wB")
+    def display_name
+      color == :black ? "bB" : "wB"
     end
 
     def move_dirs

@@ -14,11 +14,8 @@ class Knight < SteppingPiece
     [-1, 2]
   ]
 
-  attr_reader :display_name
-
-  def initialize(pos, board, color)
-    super
-    @display_name = (color == :black ? "bN" : "wN")
+  def display_name
+    color == :black ? "bN" : "wN"
   end
 
   def move_dirs
