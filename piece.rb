@@ -20,6 +20,10 @@ class Piece
     raise NotImplementedError
   end
 
+  def deep_dup(new_board)
+    self.class.new(@position.dup, new_board, @color)
+  end
+
 
 
 end

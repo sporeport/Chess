@@ -9,6 +9,20 @@ require 'byebug'
 
 class Board
 
+  def self.deep_dup(board)
+    new_board = Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE) }
+
+    board.board.each_with_index do |row, row_idx|
+      row.each_index do |col_idx|
+        unless board[[row_idx, col_idx]].nil?
+          board[[row_idx, col_idx]].deep_dup(new_board)
+        end
+      end
+    end
+
+    new_board
+  end
+
   BOARD_SIZE = 8
 
   def self.within_bounds?(pos)
@@ -80,3 +94,5 @@ Bishop.new([2, 2], board, :white)
 Knight.new([1,4], board, :white)
 Pawn.new([1,1], board, :black)
 Pawn.new([4,2], board, :white)
+board.inspect
+board2 = Board.deep_dup(board)
