@@ -1,8 +1,9 @@
 require_relative 'piece.rb'
 
-class Queen < SlidingPiece
 
-  QUEEN_DELTAS = [
+class King < SteppingPiece
+
+  KING_DELTAS = [
     [0, 1],
     [0, -1],
     [1, 0],
@@ -17,10 +18,10 @@ class Queen < SlidingPiece
 
   def initialize(pos, board, color)
     super
-    @display_name = (color == :black ? "bQ" : "wQ")
+    @display_name = (color == :black ? "bK" : "wK")
   end
 
   def move_dirs
-    QUEEN_DELTAS
+    KING_DELTAS
   end
 end
