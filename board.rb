@@ -1,15 +1,7 @@
-require_relative 'rook.rb'
-require_relative 'queen.rb'
-require_relative 'bishop.rb'
-require_relative 'king.rb'
-require_relative 'knight.rb'
-require_relative 'pawn.rb'
-
-require 'colorize'
-require 'byebug'
-
 class Board
+  BOARD_SIZE = 8
 
+  ##create as instance method
   def self.deep_dup(board)
     new_board = Board.new
 
@@ -20,8 +12,6 @@ class Board
     new_board
   end
 
-  BOARD_SIZE = 8
-
   def self.within_bounds?(pos)
     pos.all? { |coord| (0...BOARD_SIZE).include?(coord) }
   end
@@ -29,11 +19,7 @@ class Board
   attr_reader :board
 
   def initialize
-    @board = init_board
-  end
-
-  def init_board
-    Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE) }
+    @board = Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE) }
   end
 
   def [](pos)
@@ -46,9 +32,13 @@ class Board
     self.board[row][column] = value
   end
 
+  def pieces
+    board.flatten.compact
+  end
+
   def in_check?(color_to_check)
 
-    board.flatten.compact.each do |piece|
+    pieces.each do |piece|
       if piece.color != color_to_check
         return true if piece.moves.include?(king_position(color_to_check))
       end
@@ -58,7 +48,7 @@ class Board
   end
 
   def king_position(color_to_check)
-    board.flatten.compact.select do |piece|
+    pieces.select do |piece|
       piece.class == King && piece.color == color_to_check
     end.first.position
   end
@@ -84,15 +74,18 @@ class Board
   def move_into_check?(start_pos, end_pos)
     test_board = Board.deep_dup(self)
     color = test_board[start_pos].color
+
+    #move!
     test_board[end_pos] = test_board[start_pos]
     test_board[end_pos].position = end_pos
     test_board[start_pos] = nil
+
     return true if test_board.in_check?(color)
     false
   end
 
   def check_mate?(color)
-    pieces = board.flatten.compact.select do |piece|
+    pieces = self.pieces.select do |piece|
       piece.color == color
     end
 
@@ -122,16 +115,21 @@ class Board
   end
 
 
-  def display_board
+  def display_board(turn)
+    puts "\nIt is #{turn.to_s.capitalize}'s turn."
+    puts "#{turn.to_s.capitalize} is in check.\n" if in_check?(turn)
+
+    print "\n  "; ("a".."h").each { |l| print l + " " }; print "\n"
+
+    num = 8
     board.each_with_index do |row, row_idx|
+      print num.to_s + " "
       row.each_index do |col_idx|
         if board[row_idx][col_idx] != nil
           if (row_idx + col_idx) % 2 == 0
-            #print " ".colorize(background: :light_white)
             print board[row_idx][col_idx].display_name.colorize(background: :light_white)
             print " ".colorize(background: :light_white)
           else
-            #print " ".colorize(background: :light_red)
             print board[row_idx][col_idx].display_name.colorize(background: :light_red)
             print " ".colorize(background: :light_red)
           end
@@ -140,31 +138,16 @@ class Board
             print "  ".colorize(background: :light_white)
           else
             print "  ".colorize(background: :light_red)
-          # print "_ "
           end
         end
       end
+      print " " + num.to_s
+      num -= 1
       print "\n"
     end
+    print "  "; ("a".."h").each { |l| print l + " " }; print "\n"
 
     nil
   end
 
 end
-
-class MoveIntoCheckError < StandardError
-end
-
-class IllegalMoveError < StandardError
-end
-
-# board = Board.new
-# Rook.new([3, 3], board, :black)
-# Rook.new([3, 5], board, :white)
-# Rook.new([5, 3], board, :black)
-# Bishop.new([2, 2], board, :white)
-# Knight.new([1,4], board, :white)
-# Pawn.new([1,1], board, :black)
-# Pawn.new([4,2], board, :white)
-# board.inspect
-# board2 = Board.deep_dup(board)

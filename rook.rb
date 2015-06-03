@@ -1,6 +1,3 @@
-require_relative 'sliding_piece.rb'
-
-
 class Rook < SlidingPiece
 
   ROOK_DELTAS = [

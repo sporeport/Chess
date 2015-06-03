@@ -1,5 +1,3 @@
-require_relative 'piece.rb'
-
 class Pawn < Piece
 
   ATTACK_DELTA = {

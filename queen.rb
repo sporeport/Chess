@@ -1,5 +1,3 @@
-require_relative 'sliding_piece.rb'
-
 class Queen < SlidingPiece
 
   QUEEN_DELTAS = [

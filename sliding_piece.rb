@@ -1,5 +1,3 @@
-require_relative 'piece.rb'
-
 class SlidingPiece < Piece
 
   def moves
@@ -30,8 +28,5 @@ class SlidingPiece < Piece
 
   false
   end
-
-
-
-
+  
 end

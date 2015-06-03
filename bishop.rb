@@ -1,5 +1,3 @@
-require_relative 'sliding_piece.rb'
-
 class Bishop < SlidingPiece
 
     BISHOP_DELTAS = [

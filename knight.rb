@@ -1,6 +1,3 @@
-require_relative 'stepping_piece.rb'
-
-
 class Knight < SteppingPiece
 
   KNIGHT_DELTAS = [

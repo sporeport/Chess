@@ -1,5 +1,3 @@
-require 'byebug'
-
 class HumanPlayer
 
   RANK_KEY = {
