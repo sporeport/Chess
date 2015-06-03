@@ -76,6 +76,11 @@ class Board
         self[end_pos].position = end_pos
         self[start_pos] = nil
       end
+    else
+      raise IllegalMoveError.new("That is an illegal move, " +
+                                 "or you tried to move a piece " +
+                                 "from an empty space.\n" +
+                                 "Please choose a different move.")
     end
   end
 
@@ -122,6 +127,9 @@ class Board
 end
 
 class MoveIntoCheckError < StandardError
+end
+
+class IllegalMoveError < StandardError
 end
 
 # board = Board.new
