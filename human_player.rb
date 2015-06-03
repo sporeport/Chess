@@ -40,6 +40,8 @@ class HumanPlayer
       retry
   end
 
+  private
+
   def parse_move(move)
     #debugger
     unless validate_move?(move)
