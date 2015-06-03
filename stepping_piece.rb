@@ -3,10 +3,9 @@ require_relative 'piece.rb'
 class SteppingPiece < Piece
 
   def moves
-    directions = self.move_dirs
     moves = []
 
-    directions.each do |delta|
+    self.move_dirs.each do |delta|
       rel_pos = self.position
       rel_pos = [rel_pos[0] + delta[0], rel_pos[1] + delta[1]]
       moves << rel_pos if valid_move?(rel_pos)
@@ -14,6 +13,8 @@ class SteppingPiece < Piece
 
     moves
   end
+
+  private
 
   def valid_move?(pos)
     if Board.within_bounds?(pos)

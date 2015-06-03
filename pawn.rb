@@ -38,23 +38,13 @@ class Pawn < Piece
   end
 
   def valid_attack_move?(pos)
-    #can move attack if space is occupied by other color
-    if Board.within_bounds?(pos)
-      if board[pos] != nil && board[pos].color != self.color
-        return true
-      end
-    end
-
-    false
+    #can move to attack only if space is occupied by other color
+    Board.within_bounds?(pos) && board[pos] && board[pos].color != self.color
   end
 
   def valid_move?(pos)
     #can move forward if space in nil
-    if Board.within_bounds?(pos)
-      return true if board[pos].nil?
-    end
-
-    false
+    Board.within_bounds?(pos) && board[pos].nil?
   end
 
 end

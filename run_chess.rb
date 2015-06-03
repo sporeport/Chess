@@ -16,8 +16,10 @@ require_relative 'chess_game.rb'
 
 
 
+if $PROGRAM_NAME == __FILE__
 
-player1 = HumanPlayer.new
-player2 = HumanPlayer.new
+  player1 = HumanPlayer.new
+  player2 = HumanPlayer.new
 
-ChessGame.new(player1, player2).play
+  ChessGame.new(player1, player2).play
+end

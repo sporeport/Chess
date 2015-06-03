@@ -1,12 +1,12 @@
 class SlidingPiece < Piece
 
   def moves
-    directions = self.move_dirs
     moves = []
 
-    directions.each do |delta|
+    self.move_dirs.each do |delta|
       rel_pos = self.position
       rel_pos = [rel_pos[0] + delta[0], rel_pos[1] + delta[1]]
+
       while valid_move?(rel_pos, [delta[0] * -1, delta[1] * -1])
         moves << rel_pos
         rel_pos = [rel_pos[0] + delta[0], rel_pos[1] + delta[1]]
@@ -15,6 +15,8 @@ class SlidingPiece < Piece
 
     moves
   end
+
+  private
 
   def valid_move?(pos, last_delta)
     if Board.within_bounds?(pos)
@@ -28,5 +30,5 @@ class SlidingPiece < Piece
 
   false
   end
-  
+
 end
