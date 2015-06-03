@@ -1,4 +1,5 @@
 require_relative 'board.rb'
+require_relative 'human_player.rb'
 
 class ChessGame
 
@@ -35,8 +36,11 @@ class ChessGame
 
     until game_over?
       begin
-        player_move = get_move(players[turn])
-        game_board.move(player_move)
+        game_board.display_board
+        start_move = players[turn].get_start_move
+        end_move = players[turn].get_end_move
+
+        game_board.move(start_move, end_move)
       rescue MoveIntoCheckError => error
         puts error.message
         retry
