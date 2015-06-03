@@ -53,19 +53,19 @@ class Board
   end
 
   def move(start_pos, end_pos)
-    if self[start_pos] != nil && self[start_pos].moves.include?(end_pos)
-      if move_into_check?(start_pos, end_pos)
-        raise MoveIntoCheckError.new("Can't move into check, " +
-                                     "please choose a different move.")
-      else
-        move!(start_pos, end_pos)
-      end
-    else
-      raise IllegalMoveError.new("That is an illegal move, " +
+    if self[start_pos].nil? || !(self[start_pos].moves.include?(end_pos))
+      raise IllegalMoveError.new("\nThat is an illegal move, " +
                                  "or you tried to move a piece " +
                                  "from an empty space.\n" +
                                  "Please choose a different move.")
     end
+
+    if move_into_check?(start_pos, end_pos)
+      raise MoveIntoCheckError.new("\nCan't move into check, " +
+                                   "please choose a different move.")
+    end
+
+    move!(start_pos, end_pos)
   end
 
   def move!(start_pos, end_pos)

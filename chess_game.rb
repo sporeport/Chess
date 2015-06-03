@@ -49,11 +49,11 @@ class ChessGame
 
   def your_turn?(color, position)
     if game_board[position].nil?
-      raise EmptySpaceError.new("There is no piece there.")
+      raise EmptySpaceError.new("\nThere is no piece there.")
     elsif game_board[position].color == color
       true
     else
-      raise NotYourPieceError.new("That is not your piece!")
+      raise NotYourPieceError.new("\nThat is not your piece!")
     end
   end
 

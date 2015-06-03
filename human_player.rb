@@ -43,7 +43,7 @@ class HumanPlayer
   def parse_move(move)
     #debugger
     unless validate_move?(move)
-      raise InvalidInputError.new("You must enter a valid chess coordinate ex. 'a1'")
+      raise InvalidInputError.new("\nYou must enter a valid chess coordinate ex. 'a1'\n")
     end
 
     parsing_move = move.downcase.split('')
