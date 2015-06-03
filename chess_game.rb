@@ -38,9 +38,15 @@ class ChessGame
       begin
         game_board.display_board
         start_move = players[turn].get_start_move
+
+        your_turn?(turn, start_move)
+
         end_move = players[turn].get_end_move
 
         game_board.move(start_move, end_move)
+      rescue NotYourPieceError => error
+        puts error.message
+        retry
       rescue MoveIntoCheckError => error
         puts error.message
         retry
@@ -56,6 +62,14 @@ class ChessGame
     congratulate(winner)
   end
 
+  def your_turn?(color, position)
+    if game_board[position].color == color
+      true
+    else
+      raise NotYourPieceError.new("That is not your piece!")
+    end
+  end
+
   def game_over?
     game_board.check_mate?(:white) || game_board.check_mate?(:black)
   end
@@ -65,4 +79,8 @@ class ChessGame
     puts "Congratulations #{color.to_s}, you win!"
   end
 
+end
+
+
+class NotYourPieceError < StandardError
 end
