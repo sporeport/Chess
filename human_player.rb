@@ -22,30 +22,40 @@ class HumanPlayer
     h: 7
   }
 
-  def initialize
-
-  end
-
   def get_start_move
     print "Please enter your starting location:  "
     start_move = gets.chomp
-
     parse_move(start_move)
+    rescue InvalidInputError => error
+      puts error.message
+      retry
   end
 
   def get_end_move
     print "Where are you moving to:  "
     end_move = gets.chomp
-
     parse_move(end_move)
+    rescue InvalidInputError => error
+      puts error.message
+      retry
   end
 
   def parse_move(move)
     #debugger
+    unless validate_move?(move)
+      raise InvalidInputError.new("You must enter a valid chess coordinate ex. 'a1'")
+    end
+
     parsing_move = move.downcase.split('')
 
     parsing_move = [RANK_KEY[parsing_move[1].to_i], FILE_KEY[parsing_move[0].to_sym]]
 
     parsing_move
   end
+
+  def validate_move?(move)
+    return false if move.length != 2
+    ("a".."h").include?(move[0]) && (1..8).include?(move[1].to_i)
+  end
+
 end

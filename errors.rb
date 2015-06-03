@@ -1,3 +1,6 @@
+class InvalidInputError < StandardError
+end
+
 class ChessError < StandardError
 end
 
