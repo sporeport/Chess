@@ -15,7 +15,7 @@ class Knight < SteppingPiece
   ]
 
   def display_name
-    color == :black ? "bN" : "wN"
+    color == :black ? "♞" : "♘" # "bN" : "wN"
   end
 
   def move_dirs

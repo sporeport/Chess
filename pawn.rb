@@ -12,7 +12,7 @@ class Pawn < Piece
   }
 
   def display_name
-    color == :black ? "bP" : "wP"
+    color == :black ? "♟" : "♙"   # "bP" : "wP"
   end
 
   def moves

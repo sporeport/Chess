@@ -5,6 +5,7 @@ require_relative 'king.rb'
 require_relative 'knight.rb'
 require_relative 'pawn.rb'
 
+require 'colorize'
 require 'byebug'
 
 class Board
@@ -33,10 +34,6 @@ class Board
 
   def init_board
     Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE) }
-  end
-
-  def place_pieces
-
   end
 
   def [](pos)
@@ -114,9 +111,38 @@ class Board
           print board[row_idx][col_idx].display_name
           print " "
         else
-          print "__ "
+          print "_ "
         end
 
+      end
+      print "\n"
+    end
+
+    nil
+  end
+
+
+  def display_board
+    board.each_with_index do |row, row_idx|
+      row.each_index do |col_idx|
+        if board[row_idx][col_idx] != nil
+          if (row_idx + col_idx) % 2 == 0
+            #print " ".colorize(background: :light_white)
+            print board[row_idx][col_idx].display_name.colorize(background: :light_white)
+            print " ".colorize(background: :light_white)
+          else
+            #print " ".colorize(background: :light_red)
+            print board[row_idx][col_idx].display_name.colorize(background: :light_red)
+            print " ".colorize(background: :light_red)
+          end
+        else
+          if (row_idx + col_idx) % 2 == 0
+            print "  ".colorize(background: :light_white)
+          else
+            print "  ".colorize(background: :light_red)
+          # print "_ "
+          end
+        end
       end
       print "\n"
     end

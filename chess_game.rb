@@ -26,6 +26,7 @@ class ChessGame
   end
 
   def get_move(player)
+    player.get_move
   end
 
   def play
@@ -48,13 +49,11 @@ class ChessGame
     end
 
     winner = (turn == :black ? :white : :black)
-
     congratulate(winner)
-
   end
 
   def game_over?
-
+    game_board.check_mate?(:white) || game_board.check_mate?(:black)
   end
 
   def congratulate(color)

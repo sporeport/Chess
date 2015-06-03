@@ -14,7 +14,7 @@ class Queen < SlidingPiece
   ]
 
   def display_name
-    color == :black ? "bQ" : "wQ"
+    color == :black ? "♚" : "♔"  # "bQ" : "wQ"
   end
 
   def move_dirs

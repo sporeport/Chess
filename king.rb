@@ -15,7 +15,7 @@ class King < SteppingPiece
   ]
 
   def display_name
-    color == :black ? "bK" : "wK"
+    color == :black ? "♛" : "♕"  # "bK" : "wK"
   end
 
   def move_dirs
