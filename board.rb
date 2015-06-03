@@ -2,15 +2,16 @@ class Board
   BOARD_SIZE = 8
 
   ##create as instance method
-  def self.deep_dup(board)
-    new_board = Board.new
 
-    board.board.flatten.compact.each do |piece|
-      piece.deep_dup(new_board)
-    end
-
-    new_board
-  end
+  # def self.deep_dup(board)
+  #   new_board = Board.new
+  #
+  #   board.board.flatten.compact.each do |piece|
+  #     piece.deep_dup(new_board)
+  #   end
+  #
+  #   new_board
+  # end
 
   def self.within_bounds?(pos)
     pos.all? { |coord| (0...BOARD_SIZE).include?(coord) }
@@ -34,6 +35,16 @@ class Board
 
   def pieces
     board.flatten.compact
+  end
+
+  def dup
+    new_board = Board.new
+
+    self.pieces.each do |piece|
+      piece.dup(new_board)
+    end
+
+    new_board
   end
 
   def in_check?(color_to_check)
@@ -72,7 +83,7 @@ class Board
   end
 
   def move_into_check?(start_pos, end_pos)
-    test_board = Board.deep_dup(self)
+    test_board = self.dup
     color = test_board[start_pos].color
 
     #move!
