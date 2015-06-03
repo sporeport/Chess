@@ -62,8 +62,10 @@ class ChessGame
   end
 
   def congratulate(color)
+    game_board.display_board(color)
     puts "Checkmate!"
     puts "Congratulations #{color.to_s}, you win!"
+    nil
   end
 
 end

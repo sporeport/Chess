@@ -1,18 +1,6 @@
 class Board
   BOARD_SIZE = 8
 
-  ##create as instance method
-
-  # def self.deep_dup(board)
-  #   new_board = Board.new
-  #
-  #   board.board.flatten.compact.each do |piece|
-  #     piece.deep_dup(new_board)
-  #   end
-  #
-  #   new_board
-  # end
-
   def self.within_bounds?(pos)
     pos.all? { |coord| (0...BOARD_SIZE).include?(coord) }
   end
@@ -70,9 +58,7 @@ class Board
         raise MoveIntoCheckError.new("Can't move into check, " +
                                      "please choose a different move.")
       else
-        self[end_pos] = self[start_pos]
-        self[end_pos].position = end_pos
-        self[start_pos] = nil
+        move!(start_pos, end_pos)
       end
     else
       raise IllegalMoveError.new("That is an illegal move, " +
@@ -82,14 +68,17 @@ class Board
     end
   end
 
+  def move!(start_pos, end_pos)
+    self[end_pos] = self[start_pos]
+    self[end_pos].position = end_pos
+    self[start_pos] = nil
+  end
+
   def move_into_check?(start_pos, end_pos)
     test_board = self.dup
     color = test_board[start_pos].color
 
-    #move!
-    test_board[end_pos] = test_board[start_pos]
-    test_board[end_pos].position = end_pos
-    test_board[start_pos] = nil
+    test_board.move!(start_pos, end_pos)
 
     return true if test_board.in_check?(color)
     false
