@@ -1,4 +1,4 @@
-require_relative 'piece.rb'
+require_relative 'stepping_piece.rb'
 
 
 class King < SteppingPiece
@@ -13,7 +13,7 @@ class King < SteppingPiece
     [-1, 1],
     [-1, -1]
   ]
-  
+
   def display_name
     color == :black ? "bK" : "wK"
   end

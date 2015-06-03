@@ -1,4 +1,4 @@
-require_relative 'piece.rb'
+require_relative 'stepping_piece.rb'
 
 
 class Knight < SteppingPiece
