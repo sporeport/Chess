@@ -11,18 +11,6 @@ class ChessGame
     populate
   end
 
-  def populate
-    (0..7).each do |file|
-      Pawn.new([1,file], game_board, :black)
-      Pawn.new([6,file], game_board, :white)
-    end
-
-    STANDARD_CHESS_BOARD.each_with_index do |c_class, file|
-      c_class.new([0, file], game_board, :black)
-      c_class.new([7, file], game_board, :white)
-    end
-  end
-
   def play
     turn = nil
     winner = nil
@@ -47,6 +35,8 @@ class ChessGame
     congratulate(turn)
   end
 
+  private
+
   def your_turn?(color, position)
     if game_board[position].nil?
       raise EmptySpaceError.new("\nThere is no piece there.")
@@ -66,6 +56,18 @@ class ChessGame
     puts "Checkmate!"
     puts "Congratulations #{color.to_s}, you win!"
     nil
+  end
+
+  def populate
+    (0..7).each do |file|
+      Pawn.new([1,file], game_board, :black)
+      Pawn.new([6,file], game_board, :white)
+    end
+
+    STANDARD_CHESS_BOARD.each_with_index do |c_class, file|
+      c_class.new([0, file], game_board, :black)
+      c_class.new([7, file], game_board, :white)
+    end
   end
 
 end

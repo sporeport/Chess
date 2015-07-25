@@ -68,12 +68,6 @@ class Board
     move!(start_pos, end_pos)
   end
 
-  def move!(start_pos, end_pos)
-    self[end_pos] = self[start_pos]
-    self[end_pos].position = end_pos
-    self[start_pos] = nil
-  end
-
   def move_into_check?(start_pos, end_pos)
     test_board = self.dup
     color = test_board[start_pos].color
@@ -99,7 +93,6 @@ class Board
   def inspect
     board.each_with_index do |row, row_idx|
       row.each_index do |col_idx|
-        #debugger
         if board[row_idx][col_idx] != nil
           print board[row_idx][col_idx].display_name
           print " "
@@ -148,6 +141,16 @@ class Board
     print "  "; ("a".."h").each { |l| print l + " " }; print "\n"
 
     nil
+  end
+
+
+
+  protected
+
+  def move!(start_pos, end_pos)
+    self[end_pos] = self[start_pos]
+    self[end_pos].position = end_pos
+    self[start_pos] = nil
   end
 
 end
