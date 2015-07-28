@@ -5,6 +5,6 @@ To play:
 
 1. download the zip
 
-2. cd into chess
+2. cd into Chess-master
 
 3. run $ruby run_chess.rb
